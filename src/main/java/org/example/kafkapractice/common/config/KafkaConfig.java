@@ -116,7 +116,7 @@ public class KafkaConfig {
         JsonDeserializer<SimpleEvent> deserializer = new JsonDeserializer<>(SimpleEvent.class);
 
         // 역직렬화를 허용할 패키지 지정 (보안 및 타입 안전성)
-        deserializer.addTrustedPackages("com.example.kafka.event");
+        deserializer.addTrustedPackages("org.example.kafkapractice.domain.Simple.model.kafka");
 
         return new DefaultKafkaConsumerFactory<>(
             props,
@@ -149,7 +149,7 @@ public class KafkaConfig {
         JsonDeserializer<SimpleEvent> deserializer = new JsonDeserializer<>(SimpleEvent.class);
 
         // 역직렬화를 허용할 패키지 지정 (보안 및 타입 안전성)
-        deserializer.addTrustedPackages("com.example.kafka.event");
+        deserializer.addTrustedPackages("org.example.kafkapractice.domain.Simple.model.kafka");
 
         return new DefaultKafkaConsumerFactory<>(
             props,
@@ -163,7 +163,7 @@ public class KafkaConfig {
 
         ConcurrentKafkaListenerContainerFactory<String, SimpleEvent> factory = new ConcurrentKafkaListenerContainerFactory<>();
 
-        factory.setConsumerFactory(eventConsumerFactory());
+        factory.setConsumerFactory(eventConsumerFactory2());
         return factory;
     }
 
@@ -198,7 +198,7 @@ public class KafkaConfig {
         ConcurrentKafkaListenerContainerFactory<String, String> factory =
             new ConcurrentKafkaListenerContainerFactory<>();
 
-        factory.setConsumerFactory(stringConsumerFactory());
+        factory.setConsumerFactory(manualConsumerFactory());
 
         // AckMode를 MANUAL로 설정
         factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
